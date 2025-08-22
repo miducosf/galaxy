@@ -158,6 +158,23 @@ body.light-mode {
   color: #1c1c1c; /* already in your code */
 }
 
+    /* Default (dark look) uses the image + dark fade when NOT in light mode */
+body:not(.light-mode) {
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.65), rgba(0,0,0,0.15)),
+    url('assets/night_sky.jpg') center / cover no-repeat;
+  color: #e8ecff;
+}
+
+/* Light mode: grayscale image + soft white fade for readability */
+body.light-mode {
+  background:
+    linear-gradient(to right, rgba(255,255,255,0.85), rgba(255,255,255,0.20)),
+    url('assets/Night_Sky_BW.jpg') center / cover no-repeat;
+  color: #1c1c1c;
+}
+
+
   </style>
 </head>
 <body>
