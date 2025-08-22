@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mike Coleman – AI-Forward Portfolio Mockup</title>
+  <style>
+    :root {
+      --indigo-900: #0b1028;
+      --indigo-800: #121a3b;
+      --text-strong: #e8ecff;
+      --text-soft: #aab6e8;
+      --neutral-100: #f4f6f8;
+      --charcoal: #2d2d2d;
+      --accent-1: #00c6ff;
+      --accent-2: #0072ff;
+      --accent-3: #6c63ff;
+      --coral: #ff6b6b;
+      --glass: rgba(255,255,255,0.06);
+      --shadow-glow: 0 0 24px rgba(0,114,255,0.35);
+      --radius-xl: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-strong);
+      background: radial-gradient(1000px 600px at 20% -10%, rgba(0,198,255,0.25), transparent 60%),
+                  radial-gradient(900px 500px at 120% 10%, rgba(108,99,255,0.18), transparent 60%),
+                  linear-gradient(160deg, var(--indigo-900), var(--indigo-800) 60%);
+      overflow-x: hidden;
+      transition: background-color .25s ease, background-image .25s ease, color .25s ease;
+    }
+
+    body.light-mode {
+      color: #1c1c1c;
+      background: linear-gradient(160deg, #ffffff, #f4f9ff);
+    }
+    body.light-mode .nav { background: rgba(255,255,255,0.9); border-bottom: 1px solid #e2e8f0; }
+    body.light-mode .nav a { color: #374151; }
+    body.light-mode .nav a:hover { color: #111827; }
+
+    body.light-mode .subtitle { color: #374151; }
+    body.light-mode .title .grad { background: linear-gradient(90deg, var(--accent-3), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+    body.light-mode .btn { background: #ffffff; color: #1c1c1c; border: 1px solid #d9e1ff; }
+    body.light-mode .btn:hover { background: #f5f8ff; }
+    body.light-mode .btn.primary { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #ffffff; box-shadow: 0 0 14px rgba(0,114,255,0.25); }
+
+    body.light-mode .card { background: linear-gradient(180deg, #ffffff, #f9fbff); border: 1px solid #e0e7ff; box-shadow: 0 6px 16px rgba(0,114,255,0.08); }
+    body.light-mode .card p { color: #4b5563; }
+
+    body.light-mode .preview { background: #ffffff; border: 1px solid #e5e7eb; box-shadow: 0 10px 30px rgba(15,23,42,.08); }
+    body.light-mode .preview .screen { background: linear-gradient(160deg, #f0f7ff, #ffffff); border: 1px solid #e5e7eb; }
+
+    .nav { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 18px 28px; backdrop-filter: blur(8px); background: linear-gradient(to bottom, rgba(10,15,40,0.7), rgba(10,15,40,0.2)); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .logo { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); box-shadow: var(--shadow-glow); }
+    .brand span { font-weight: 700; }
+    .nav-links { display: flex; align-items: center; }
+    .nav a { text-decoration: none; margin-left: 18px; font-weight: 600; color: var(--text-soft); transition: color .25s ease; }
+    .nav a:hover { color: white; }
+
+    /* Toggle pill styling */
+    #modeToggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-soft);
+      cursor: pointer;
+      transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+    }
+    #modeToggle:hover { background: rgba(255,255,255,0.16); color: #fff; }
+    body.light-mode #modeToggle { background: #f9fafb; border: 1px solid #e5e7eb; color: #374151; }
+    body.light-mode #modeToggle:hover { background: #e5e7eb; color: #111827; }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 4px; cursor: pointer; margin-left: 16px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--text-soft); transition: all .3s ease; }
+    .nav.open .hamburger span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .nav.open .hamburger span:nth-child(2) { opacity: 0; }
+    .nav.open .hamburger span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    .mobile-menu { display: none; flex-direction: column; padding: 12px 20px; background: rgba(15,23,42,.96); position: absolute; top: 64px; right: 20px; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,.4); }
+    .mobile-menu a { margin: 10px 0; color: var(--text-strong); }
+
+    @media(max-width: 768px){
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav.open .mobile-menu { display: flex; }
+    }
+
+    .hero { max-width: 1100px; margin: 72px auto; padding: 0 24px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; }
+    @media (max-width: 980px) { .hero { grid-template-columns: 1fr; gap: 20px; } }
+
+    .eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; text-transform: uppercase; color: #b9c6ff; }
+    .title { font-weight: 700; font-size: 44px; line-height: 1.1; margin: 10px 0 14px; }
+    .title .grad { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; transition: background-image .25s ease; }
+    .subtitle { color: var(--text-soft); font-size: 18px; line-height: 1.6; max-width: 60ch; transition: color .25s ease; }
+
+    .cta-row { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { padding: 12px 18px; border-radius: 12px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); color: white; border: 1px solid rgba(255,255,255,0.1); transition: background-color .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease; }
+    .btn:hover { background: rgba(255,255,255,0.12); }
+    .btn.primary { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); border: none; box-shadow: var(--shadow-glow); color: #fff; }
+
+    .preview { align-self: start; background: var(--glass); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); padding: 18px; box-shadow: 0 10px 40px rgba(0,0,0,0.35); backdrop-filter: blur(10px); transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .preview .screen { height: 320px; border-radius: 14px; overflow: hidden; background: radial-gradient(600px 300px at 20% 0%, rgba(0,198,255,0.18), transparent 60%), linear-gradient(160deg, #0f1535, #0e1330); border: 1px solid rgba(255,255,255,0.08); position: relative; transition: background-color .25s ease, background-image .25s ease, border-color .25s ease; }
+
+    .teasers { max-width: 1100px; margin: 30px auto 80px; padding: 0 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width: 980px) { .teasers { grid-template-columns: 1fr; } }
+
+    .card { border-radius: var(--radius-xl); padding: 18px; border: 1px solid rgba(255,255,255,0.09); background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04)); transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease, background-image .25s ease, border-color .25s ease; backdrop-filter: blur(8px); }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-glow); }
+    .card h3 { margin: 8px 0 8px; font-size: 18px; }
+    .card p { margin: 0; color: var(--text-soft); font-size: 14px; line-height: 1.5; }
+
+    footer { max-width:1100px; margin: 40px auto 60px; padding: 0 24px; color: var(--text-soft); font-size: 14px; transition: color .25s ease; }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand"><div class="logo"></div><span>Mike Coleman</span></div>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#" id="modeToggle" aria-pressed="false">🌙 Light Mode</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#" id="mobileModeToggle">🌙 Light Mode</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Learning • AI • Strategy</div>
+        <h1 class="title">Reimagining Learning with <span class="grad">AI-driven problem solving</span>.</h1>
+        <p class="subtitle">I design smarter, data-informed experiences and advisory frameworks that turn complex learning challenges into elegant, measurable outcomes.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#projects">Explore Projects</a>
+          <a class="btn" href="#about">View Resume</a>
+        </div>
+      </div>
+      <aside class="preview" aria-label="project preview">
+        <div class="screen">
+          <p style="padding:12px;">Hi Mike, how should we launch AI in our onboarding?</p>
+        </div>
+      </aside>
+    </section>
+
+    <section id="projects" class="teasers">
+      <article class="card"><h3>ACE – Adaptive Coach Engine</h3><p>New-hire mentor chatbot demo.</p></article>
+      <article class="card"><h3>CYOA – Tone & Channel Simulator</h3><p>Interactive sales training demo.</p></article>
+      <article class="card"><h3>AI Learning Transformation Playbook</h3><p>Leader-facing blueprint for AI adoption.</p></article>
+    </section>
+  </main>
+
+  <footer>© <span id="y"></span> Mike Coleman — SF • Remote • EU Eligible</footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    (function(){
+      const btn = document.getElementById('modeToggle');
+      const mobileBtn = document.getElementById('mobileModeToggle');
+      const saved = localStorage.getItem('mode');
+      const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+      const startLight = saved ? saved === 'light' : prefersLight;
+      if(startLight){ document.body.classList.add('light-mode'); updateLabel(); }
+      function toggle(){
+        document.body.classList.toggle('light-mode');
+        const mode = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        localStorage.setItem('mode', mode);
+        updateLabel();
+      }
+      function updateLabel(){
+        const light = document.body.classList.contains('light-mode');
+        btn.textContent = light ? '☀️ Dark Mode' : '🌙 Light Mode';
+        mobileBtn.textContent = light ? '☀️ Dark Mode' : '🌙 Light Mode';
+        btn.setAttribute('aria-pressed', String(light));
+        mobileBtn.setAttribute('aria-pressed', String(light));
+      }
+      btn.addEventListener('click', function(e){ e.preventDefault(); toggle(); });
+      mobileBtn.addEventListener('click', function(e){ e.preventDefault(); toggle(); });
+    })();
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.nav');
+    hamburger.addEventListener('click', ()=>{
+      nav.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
