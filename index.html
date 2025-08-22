@@ -218,6 +218,25 @@ body.light-mode .nav {
 body.light-mode .nav a { color: #374151; }
 body.light-mode .nav a:hover { color: #111827; }
 
+    /* 🔎 Light-mode: let background bleed behind cards & preview */
+body.light-mode .card,
+body.light-mode .preview {
+  background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.55));
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Make inner “screen” glassy too so it matches */
+body.light-mode .preview .screen {
+  background: linear-gradient(160deg, rgba(240,247,255,0.6), rgba(255,255,255,0.35));
+  border-color: rgba(0,0,0,0.06);
+}
+
+/* Optional: soften card text a touch for contrast on the lighter glass */
+body.light-mode .card p { color: #4b5563; }
+
 
   </style>
 </head>
