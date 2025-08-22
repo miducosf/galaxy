@@ -122,6 +122,25 @@
     .card p { margin: 0; color: var(--text-soft); font-size: 14px; line-height: 1.5; }
 
     footer { max-width:1100px; margin: 40px auto 60px; padding: 0 24px; color: var(--text-soft); font-size: 14px; transition: color .25s ease; }
+
+    /* Light-mode hamburger & dropdown */
+body.light-mode .hamburger span {
+  background: #374151; /* slate-700 for contrast on light bg */
+}
+
+body.light-mode .mobile-menu {
+  background: rgba(255,255,255,0.98);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 30px rgba(15,23,42,0.12);
+}
+
+body.light-mode .mobile-menu a {
+  color: #1f2937;            /* slate-800 */
+}
+
+body.light-mode .mobile-menu a:hover {
+  color: #0f172a;            /* slate-900 */
+}
   </style>
 </head>
 <body>
