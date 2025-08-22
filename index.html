@@ -141,6 +141,23 @@ body.light-mode .mobile-menu a {
 body.light-mode .mobile-menu a:hover {
   color: #0f172a;            /* slate-900 */
 }
+
+    /* 🌙 Dark Mode Background */
+body.dark-mode {
+  background: 
+    linear-gradient(to right, rgba(0,0,0,0.65), rgba(0,0,0,0.15)),
+    url('/assets/night_sky.jpg') center/cover no-repeat;
+  color: #e8ecff; /* adjust text color if needed */
+}
+
+/* ☀️ Light Mode Background */
+body.light-mode {
+  background: 
+    linear-gradient(to right, rgba(255,255,255,0.85), rgba(255,255,255,0.2)),
+    url('/assets/Night_Sky_BW.jpg') center/cover no-repeat;
+  color: #1c1c1c; /* already in your code */
+}
+
   </style>
 </head>
 <body>
